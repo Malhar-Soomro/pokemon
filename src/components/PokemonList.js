@@ -2,8 +2,6 @@ import { Container, Grid } from '@material-ui/core';
 import React from 'react';
 import PokemonCard from './PokemonCard';
 
-
-
 const PokemonList = ({ pokemon }) => {
     return (
         <Container>

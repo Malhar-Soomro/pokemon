@@ -9,16 +9,18 @@ function App() {
   const [currentPageUrl, setCurrentPageUrl] = useState("https://pokeapi.co/api/v2/pokemon?offset=0&limit=20")
   const [nextPageUrl, setNextPageUrl] = useState("");
   const [prevPageUrl, setPrevPageUrl] = useState("");
+  const [loading, setLoading] = useState(true);
+
 
   const fetchData = async () => {
     const url = currentPageUrl;
     const data = await fetch(url);
     const parsedData = await data.json();
+    setLoading(false)
     console.log(parsedData);
     setPokemon(parsedData.results.map(p => p.name));
     setNextPageUrl(parsedData.next)
     setPrevPageUrl(parsedData.previous)
-    // console.log(parsedData);
   }
 
 
@@ -33,16 +35,17 @@ function App() {
   useEffect(() => {
     fetchData();
   }, [currentPageUrl]);
-  return (
 
-    <>
+  if (loading === true) return "loading...";
+
+  return (
+    <div>
       <PokemonList pokemon={pokemon} />
-      {/* <img src="https://img.pokemondb.net/artwork/large/ivysaur.jpg" alt="" /> */}
       <Pagination
         gotoNextPage={gotoNextPage}
         gotoPrevPage={gotoPrevPage}
       />
-    </>
+    </div>
   );
 }
 
