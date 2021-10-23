@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PokemonList from "./components/PokemonList";
 import Pagination from "./components/Pagination";
-import PokemonCard from "./components/PokemonCard";
+import Spinner from "./components/Spinner";
 
 function App() {
   const [pokemon, setPokemon] = useState([]);
@@ -23,7 +23,6 @@ function App() {
     setPrevPageUrl(parsedData.previous)
   }
 
-
   const gotoPrevPage = () => {
     setCurrentPageUrl(prevPageUrl);
   }
@@ -36,14 +35,18 @@ function App() {
     fetchData();
   }, [currentPageUrl]);
 
-  if (loading === true) return "loading...";
+  // if (loading === true) return <Spinner />;
 
   return (
     <div>
-      <PokemonList pokemon={pokemon} />
+      <div className="text-center">
+        {loading && <Spinner />}
+      </div>
+
+      <PokemonList pokemon={pokemon} loading={loading} />
       <Pagination
-        gotoNextPage={gotoNextPage}
-        gotoPrevPage={gotoPrevPage}
+        gotoNextPage={nextPageUrl ? gotoNextPage : null}
+        gotoPrevPage={prevPageUrl ? gotoPrevPage : null}
       />
     </div>
   );

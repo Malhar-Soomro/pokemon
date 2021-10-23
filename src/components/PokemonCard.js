@@ -13,11 +13,12 @@ const useStyle = makeStyles((theme) => ({
     }
 }));
 
-const PokemonCard = ({ pokemonName }) => {
+const PokemonCard = ({ pokemonName, loading }) => {
     const classes = useStyle();
     return (
         <>
-            <Card className={classes.card}>
+
+            {!loading && <Card className={classes.card}>
                 <CardHeader
                     title={pokemonName}
                 />
@@ -26,7 +27,7 @@ const PokemonCard = ({ pokemonName }) => {
                     component="img"
                     image={`https://img.pokemondb.net/artwork/large/${pokemonName}.jpg`}
                 />
-            </Card>
+            </Card>}
         </>
     )
 }

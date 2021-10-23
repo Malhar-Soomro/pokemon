@@ -14,6 +14,7 @@ const Pagination = ({ gotoPrevPage, gotoNextPage }) => {
     return (
         <Container className={classes.root}>
             <Button
+                disabled={!gotoPrevPage}
                 variant="contained"
                 color="secondary"
                 onClick={gotoPrevPage}
@@ -21,6 +22,7 @@ const Pagination = ({ gotoPrevPage, gotoNextPage }) => {
                 Previous
             </Button>
             <Button
+                disabled={!gotoNextPage}
                 variant="contained"
                 color="secondary"
                 onClick={gotoNextPage}
