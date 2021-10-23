@@ -23,7 +23,7 @@ const PokemonCard = ({ pokemonName, loading }) => {
                     title={pokemonName}
                 />
                 <CardMedia
-                    style={{ width: "50px" }}
+                    style={{ width: "45px" }}
                     component="img"
                     image={`https://img.pokemondb.net/artwork/large/${pokemonName}.jpg`}
                 />
