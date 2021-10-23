@@ -13,21 +13,26 @@ const useStyle = makeStyles((theme) => ({
     }
 }));
 
-const PokemonCard = ({ pokemonName, loading }) => {
+const PokemonCard = ({ pokemonName }) => {
     const classes = useStyle();
+    const capitalize = (name) => {
+        const lower = name.toLowerCase();
+        const titleCase = lower.charAt(0).toUpperCase() + lower.slice(1);
+        return titleCase;
+    }
+    capitalize(pokemonName)
     return (
         <>
-
-            {!loading && <Card className={classes.card}>
+            <Card className={classes.card}>
                 <CardHeader
-                    title={pokemonName}
+                    title={capitalize(pokemonName)}
                 />
                 <CardMedia
                     style={{ width: "45px" }}
                     component="img"
                     image={`https://img.pokemondb.net/artwork/large/${pokemonName}.jpg`}
                 />
-            </Card>}
+            </Card>
         </>
     )
 }

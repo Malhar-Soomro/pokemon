@@ -7,7 +7,6 @@ import LoadingBar from 'react-top-loading-bar';
 
 function App() {
   const [pokemon, setPokemon] = useState([]);
-  // https://pokeapi.co/api/v2/pokemon?offset=0&limit=20
   const [currentPageUrl, setCurrentPageUrl] = useState("https://pokeapi.co/api/v2/pokemon?offset=0&limit=9")
   const [nextPageUrl, setNextPageUrl] = useState("");
   const [prevPageUrl, setPrevPageUrl] = useState("");
@@ -40,7 +39,7 @@ function App() {
     fetchData();
   }, [currentPageUrl]);
 
-  // if (loading === true) return <Spinner />;
+  if (loading === true) return <Spinner />;
 
   return (
     <div>
@@ -53,7 +52,7 @@ function App() {
         {loading && <Spinner />}
       </div>
 
-      <PokemonList pokemon={pokemon} loading={loading} />
+      <PokemonList pokemon={pokemon} />
       <Pagination
         gotoNextPage={nextPageUrl ? gotoNextPage : null}
         gotoPrevPage={prevPageUrl ? gotoPrevPage : null}
