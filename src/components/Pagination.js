@@ -1,6 +1,7 @@
 import { Button, Container } from '@material-ui/core'
 import React from 'react'
 import { makeStyles } from '@material-ui/core';
+import { StylesProvider } from '@material-ui/core';
 
 const useStyle = makeStyles({
     root: {
@@ -12,24 +13,28 @@ const useStyle = makeStyles({
 const Pagination = ({ gotoPrevPage, gotoNextPage }) => {
     const classes = useStyle();
     return (
-        <Container className={classes.root}>
-            <Button
-                disabled={!gotoPrevPage}
-                variant="contained"
-                color="secondary"
-                onClick={gotoPrevPage}
-            >
-                Previous
-            </Button>
-            <Button
-                disabled={!gotoNextPage}
-                variant="contained"
-                color="secondary"
-                onClick={gotoNextPage}
-            >
-                Next
-            </Button>
-        </Container>
+        <StylesProvider injectFirst>
+            <Container className={classes.root}>
+                <h2 className='font-bold text-xl'>My buttons</h2>
+                <Button
+                    disabled={!gotoPrevPage}
+                    variant="contained"
+                    color="secondary"
+                    onClick={gotoPrevPage}
+                >
+                    Previous
+                </Button>
+                <Button
+                    disabled={!gotoNextPage}
+                    variant="contained"
+                    color="secondary"
+                    onClick={gotoNextPage}
+                >
+                    Next
+                </Button>
+
+            </Container>
+        </StylesProvider>
     )
 }
 

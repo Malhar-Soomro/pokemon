@@ -1,63 +1,40 @@
 import React, { useEffect, useState } from "react";
-import PokemonList from "./components/PokemonList";
-import Pagination from "./components/Pagination";
-import Spinner from "./components/Spinner";
-import LoadingBar from 'react-top-loading-bar';
-
+import "./index.css";
+import { Button, Checkbox, Form, Input } from 'antd';
+import Home from "./components/Home";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link
+} from "react-router-dom";
 
 function App() {
-  const [pokemon, setPokemon] = useState([]);
-  const [currentPageUrl, setCurrentPageUrl] = useState("https://pokeapi.co/api/v2/pokemon?offset=0&limit=9")
-  const [nextPageUrl, setNextPageUrl] = useState("");
-  const [prevPageUrl, setPrevPageUrl] = useState("");
-  const [loading, setLoading] = useState(true);
-  const [progress, setProgress] = useState(0)
-
-
-  const fetchData = async () => {
-    setProgress(0)
-    const url = currentPageUrl;
-    setProgress(30)
-    const data = await fetch(url);
-    setProgress(100)
-    const parsedData = await data.json();
-    setLoading(false)
-    setPokemon(parsedData.results.map(p => p.name));
-    setNextPageUrl(parsedData.next)
-    setPrevPageUrl(parsedData.previous)
-  }
-
-  const gotoPrevPage = () => {
-    setCurrentPageUrl(prevPageUrl);
-  }
-
-  const gotoNextPage = () => {
-    setCurrentPageUrl(nextPageUrl);
-  }
-
-  useEffect(() => {
-    fetchData();
-  }, [currentPageUrl]);
-
-  if (loading === true) return <Spinner />;
-
   return (
-    <div>
-      <LoadingBar
-        color='#0000FF'
-        progress={progress}
-        height={3}
-      />
-      <div className="text-center">
-        {loading && <Spinner />}
-      </div>
+    <Router>
+      <div>
+        {/* <Home /> */}
+        <Routes>
+          <Route exact path="/" element={<Home />}>
+          </Route>
 
-      <PokemonList pokemon={pokemon} />
-      <Pagination
-        gotoNextPage={nextPageUrl ? gotoNextPage : null}
-        gotoPrevPage={prevPageUrl ? gotoPrevPage : null}
-      />
-    </div>
+          <Route exact path="/register" element={<Register />}>
+          </Route>
+
+          <Route exact path="/login" element={<Register />}>
+          </Route>
+
+          {/* <Route path="/register">
+            <Register />
+          </Route>
+          <Route path="/login">
+            <Login />
+          </Route> */}
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
